@@ -39,6 +39,54 @@
 
                         </tr>
                       </tfoot>
+                      <tbody>
+                        @foreach($mahasiswas as $mhs)
+                        <tr>
+                            <td>{{ $mhs->no }}</td>
+                            <td>{{ $mhs->name }}</td>
+                            <td>{{ $mhs->address }}</td>
+                            <td>{{ $mhs->email }}</td>
+                            <td>{{ $mhs->phone }}</td>
+                            <td>{{ $mhs->birth_date }}</td>
+                            <td>{{ $mhs->dosenWali->nik }} - {{ $mhs->dosenWali->name }}</td>
+                            <td>
+                                <div class="form-button-action">
+                                    <button
+                                        data-bs-toggle="tooltip"
+                                        title="Student Detail"
+                                        class="btn btn-link btn-success detail-data"
+                                        data-original-title="Student Detail"
+                                        data-url="{{ route('mahasiswaDetail', [$mhs->nrp]) }}"
+                                    >
+                                        <i class="fas fa-info-circle"></i>
+                                    </button>
+                                    <button
+                                        data-bs-toggle="tooltip"
+                                        title="Edit Student"
+                                        class="btn btn-link btn-primary edit-data"
+                                        data-original-title="Edit Student"
+                                        data-url="{{ route('mahasiswaUpdate', [$mhs->nrp]) }}"
+                                    >
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <form method="post" action="{{ route('mahasiswaDelete', [$mhs->nrp]) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button
+                                            type="submit"
+                                            data-bs-toggle="tooltip"
+                                            title="Delete Student"
+                                            class="btn btn-link btn-danger delete-data"
+                                            data-original-title="Remove Student"
+                                        >
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>
