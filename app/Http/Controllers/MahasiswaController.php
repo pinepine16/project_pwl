@@ -29,7 +29,15 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData =validator( $request->all(),[
+            'id' => 'required|string|max:11|unique:mahasiswa,id',
+            'address' => 'required|string|max:45',
+            'name' => 'required|string|max:45',
+            'semester' => 'required|string|max:2',
+        ])->validate();
+        $letter_detail = new letter_detail($validatedData);
+        $letter_detail->save();
+        return redirect(route('mahasiswaList'));
     }
 
     /**

@@ -21,8 +21,10 @@ class User extends Authenticatable
     protected $fillable = [
         'nim',
         'password',
-        'role_id'
     ];
+
+    protected $primaryKey = "nim";
+    public $incrementing = false;
 
     /**
      * The attributes that should be hidden for serialization.

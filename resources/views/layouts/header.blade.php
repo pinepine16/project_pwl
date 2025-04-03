@@ -36,7 +36,13 @@
                       <i class="ti ti-list-check fs-6"></i>
                       <p class="mb-0 fs-3">My Task</p>
                     </a>
-                    <a href="./authentication-login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                    <!-- <a href="./authentication-login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a> -->
+                    <form method="post" action="{{route('logout')}}">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item" 
+                                    onclick="event.preventDefault(); this.closest('form').submit();
+                                    ">Logout</button>
+                                </form>
                   </div>
                 </div>
               </li>

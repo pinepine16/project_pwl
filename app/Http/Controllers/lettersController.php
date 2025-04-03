@@ -28,7 +28,20 @@ class lettersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = validator($request -> all(),[
+            'alamat' => 'required|string|max:200',
+            'semester' =>'required|string|max:2',
+            'keperluan' => 'required|string|max:4',
+            'kode_mk' => 'required|string|max:5',
+            'nama_mk' => 'required|string|max:30',
+            'topik' => 'required|string|max:45',
+            'letters_id' => 'required|string',
+        ])->validate();
+        $surat = new Surat($validatedData);
+        $surat->save();
+        return redicted(route('suratKl'));
+        
+    
     }
 
     /**

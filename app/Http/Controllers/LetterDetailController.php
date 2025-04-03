@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\letter_detail;
 use Illuminate\Http\Request;
 
-class letter_detailController extends Controller
+class LetterDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,6 +25,25 @@ class letter_detailController extends Controller
         //
     }
 
+    public function skma()
+    {
+        return view ('surat.skma');
+    }
+
+    public function lhs()
+    {
+        return view ('surat.lhs');
+    }
+
+    public function sptmk()
+    {
+        return view ('surat.sptmk');
+    }
+
+    public function kl()
+    {
+        return view ('surat.kl');
+    }
     /**
      * Store a newly created resource in storage.
      */
