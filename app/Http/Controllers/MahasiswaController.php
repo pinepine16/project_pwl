@@ -45,7 +45,12 @@ class MahasiswaController extends Controller
      */
     public function show(mahasiswa $mahasiswa)
     {
-        //
+        $student = Mahasiswa::find($id);
+      if ($student == null) {
+        return back()->withErrors(['err_msg' => 'Student not found!']);
+      }
+      return view('Mahasiswa.detail')
+        ->with('mahasiswa', $student);
     }
 
     /**

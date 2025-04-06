@@ -64,31 +64,7 @@
 @endsection
 
 @section('ExtraCSS')
-<style>
-    .btn-custom-blue {
-        background-color: #003366 !important; /* Biru tua */
-        color: white !important;
-        border: none !important;
-        padding: 10px 20px;
-        border-radius: 5px;
-    }
 
-    /* .btn-custom-blue:hover {
-        background-color: #002244 !important;
-    } */
-
-    .btn-custom-lightblue {
-        background-color: #3399ff !important; /* Biru muda */
-        color: white !important;
-        border: none !important;
-        padding: 10px 20px;
-        border-radius: 5px;
-    }
-
-    /* .btn-custom-lightblue:hover {
-        background-color: #0073e6 !important;
-    } */
-</style>
 @endsection
 
 @section('ExtraJS')

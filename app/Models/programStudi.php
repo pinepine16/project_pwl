@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class role extends Model
+class programStudi extends Model
 {
-    protected $table = 'role';
+    protected $table = 'program_studi';
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['role_name'];
-    
+    protected $fillable = [ 'major_name'];
+
     protected $keyType = 'string';
 
     public $incrementing = false;

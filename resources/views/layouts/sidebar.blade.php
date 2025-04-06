@@ -17,14 +17,26 @@
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">Home</span>
             </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="{{route('mahasiswaList')}}" aria-expanded="false">
-                <span>
-                  <i class="ti ti-layout-dashboard"></i>
-                </span>
-                <span class="hide-menu">Dashboard</span>
-              </a>
-            </li>
+            @if(Auth::user()->role_id == 1) 
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="{{route('adminList')}}" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-layout-dashboard"></i>
+                  </span>
+                  <span class="hide-menu">Dashboard</span>
+                </a>
+              </li>
+            @endif
+
+            @if(Auth::user()->role_id == 4) 
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="{{route('mahasiswaList')}}" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-layout-dashboard"></i>
+                  </span>
+                  <span class="hide-menu">Dashboard</span>
+                </a>
+              </li>
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">Jenis Surat</span>
@@ -61,14 +73,16 @@
                 <span class="hide-menu">Laporan Hasil Studi</span>
               </a>
             </li>
-            <!-- <li class="sidebar-item">
-              <a class="sidebar-link" href="./ui-typography.html" aria-expanded="false">
+            @endif
+
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{{route('userCreate')}}" aria-expanded="false">
                 <span>
                   <i class="ti ti-typography"></i>
                 </span>
-                <span class="hide-menu">Typography</span>
+                <span class="hide-menu">Create User</span>
               </a>
-            </li> -->
+            </li>
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">AUTH</span>

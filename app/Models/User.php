@@ -18,12 +18,12 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-    protected $fillable = [
-        'nim',
-        'password',
-    ];
+    protected $fillable = ['name', 'password', 'role_id', 'program_studi_id'];
 
-    protected $primaryKey = "nim";
+
+    public $timestamps = false;
+
+    protected $primaryKey = "id";
     public $incrementing = false;
 
     /**
@@ -48,4 +48,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    
+    public function role()
+    {
+        return $this->belongsTo(role::class);
+    }
+
+    public function programStudi()
+    {
+        return $this->belongsTo(programStudi::class);
+    }
+
 }

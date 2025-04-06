@@ -4,62 +4,64 @@
 
 <div class="row">
     <div>
-        <h3 class="fw-bold mb-3">Dashboard Mahasiswa</h3>
+        <h3 class="fw-bold mb-3 text-center">Dashboard Admin</h3>
     </div>
     <div class="card">
-        <div class="card-header">
-            <h4 class="card-title">Surat Mahasiswa</h4>
+        <div class="card-header text-center">
+            <h4 class="card-title">Users</h4>
         </div>
 
         <div class="card-body">
             <div class="table-responsive">
-                <table id="add-row" class="table table-striped table-hover">
-                    <thead>
+                <table id="add-row" class="table table-striped table-hover text-center align-middle">
+                    <thead class="table-primary">
                         <tr>
                             <th>No</th>
-                            <th>Jenis Surat</th>
-                            <th>Status</th>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <!-- <th>Password</th> -->
+                            <th>Role</th>
+                            <th>Program Studi</th>
                             <th style="width: 15%">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($mahasiswas as $index => $mhs)
+                    @foreach($admins as $adm)
                         <tr>
-                            <td>{{ $index + 1 }}</td>
-                            <td>{{ $mhs->jenis_surat }}</td>
+                            <td>{{ $loop->iteration }}</td> 
+                            <td>{{ $adm->id }}</td>
+                            <td>{{ $adm->name }}</td>
+                            <!-- <td>{{ $adm->password }}</td> -->
+                            <td>{{ $adm->role->role_name }}</td>
+                            <td>{{ $adm->programStudi->major_name }}</td>
                             <td>
-                                <span class="badge 
-                                    {{ $mhs->status == 'Disetujui' ? 'bg-success' : 
-                                       ($mhs->status == 'Ditolak' ? 'bg-danger' : 'bg-warning') }}">
-                                    {{ $mhs->status }}
-                                </span>
-                            </td>
-                            <td>
-                                <div class="btn-group" role="group">
-                                    <a 
-                                        href="{{ route('mahasiswaDetail', $mhs->nrp) }}" 
-                                        class="btn btn-info btn-sm"
-                                        data-bs-toggle="tooltip" title="Detail Mahasiswa">
-                                        <i class="fas fa-info-circle"></i>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a
+                                        href="{{ route('userUpdate', [$adm->id]) }}"
+                                        class="ti ti-edit btn-primary"
+                                        data-bs-toggle="tooltip"
+                                        title="Edit User"
+                                    >
+                                        <i class="fas fa-edit"></i>
                                     </a>
-                                    <a 
-                                        href="{{ route('mahasiswaUpdate', $mhs->nrp) }}" 
-                                        class="btn btn-primary btn-sm"
-                                        data-bs-toggle="tooltip" title="Edit Mahasiswa">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                    <form method="post" action="{{ route('mahasiswaDelete', $mhs->nrp) }}" class="d-inline" 
-                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
+                                    <form method="post" action="{{ route('userDelete', [$adm->id]) }}">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" data-bs-toggle="tooltip" title="Hapus Mahasiswa">
-                                            <i class="fa fa-trash"></i>
+                                        <button
+                                            type="submit"
+                                            class="btn btn-sm btn-danger"
+                                            data-bs-toggle="tooltip"
+                                            title="Delete User"
+                                            onclick="return confirm('Yakin ingin menghapus user ini?')"
+                                        >
+                                            <i class="fas fa-trash-alt"></i>
                                         </button>
+                                        
                                     </form>
                                 </div>
                             </td>
                         </tr>
-                        @endforeach
+                    @endforeach
                     </tbody>
                 </table>
             </div>
@@ -78,9 +80,49 @@
 @endsection
 
 @section('ExtraJS')
+<script src="{{ asset('assets/js/plugin/sweetalert2/sweetalert2.all.min.js') }}"></script>
 <script>
     $(document).ready(function() {
         $('[data-bs-toggle="tooltip"]').tooltip();
     });
+
+    $("#table-student").DataTable({
+        pageLength: 25,
+    });
+    $('.detail-data').click(function () {
+        window.location.href = $(this).data('url');
+    })
+    $('.edit-data').click(function () {
+        window.location.href = $(this).data('url');
+    })
+    $('.delete-data').click(function (e) {
+        e.preventDefault()
+        Swal.fire({
+            title: "Confirm to delete this data?",
+            showCancelButton: true,
+            confirmButtonText: "Yes",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $(e.target).closest("form").submit()
+            }
+        })
+    })
+    @error('err_msg')
+    $.notify({
+        message: "{{ $message }}"
+    }, {
+        type: "danger",
+        delay: 4000,
+    })
+    @enderror
+
+    @if (session('status'))
+    $.notify({
+        message: "{{ session('status') }}"
+    }, {
+        delay:5000,
+        type: "info"
+    })
+    @endif
 </script>
 @endsection

@@ -37,18 +37,18 @@
                             <td>
                                 <div class="btn-group" role="group">
                                     <a 
-                                        href="{{ route('mahasiswaDetail', $mhs->nrp) }}" 
+                                        href="{{ route('mahasiswaDetail', $mhs->id) }}" 
                                         class="btn btn-info btn-sm"
                                         data-bs-toggle="tooltip" title="Detail Mahasiswa">
                                         <i class="fas fa-info-circle"></i>
                                     </a>
                                     <a 
-                                        href="{{ route('mahasiswaUpdate', $mhs->nrp) }}" 
+                                        href="{{ route('mahasiswaUpdate', $mhs->id) }}" 
                                         class="btn btn-primary btn-sm"
                                         data-bs-toggle="tooltip" title="Edit Mahasiswa">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <form method="post" action="{{ route('mahasiswaDelete', $mhs->nrp) }}" class="d-inline" 
+                                    <form method="post" action="{{ route('mahasiswaDelete', $mhs->id) }}" class="d-inline" 
                                         onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
                                         @csrf
                                         @method('DELETE')
