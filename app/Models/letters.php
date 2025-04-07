@@ -2,17 +2,32 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class letters extends Model
+class Letter extends Model
 {
+    use HasFactory;
+
     protected $table = 'letters';
 
-    protected $primaryKey = 'id';
+    protected $fillable = [
+        'status', 'created_at', 'updated_at', 'uploaded_by',
+        'lettertype_id_type', 'mahasiswa_id'
+    ];
 
-    protected $fillable = [ 'alamat', 'semester', 'keperluan', 'kode_mk','nama_mk','tujuan','topik'];
+    public function mahasiswa()
+    {
+        return $this->belongsTo(Mahasiswa::class, 'mahasiswa_id');
+    }
 
-    protected $keyType = 'string';
+    public function letterType()
+    {
+        return $this->belongsTo(lettertype::class, 'lettertype_id_type');
+    }
 
-    public $incrementing = false;
+    public function detail()
+    {
+        return $this->hasOne(letter_detail::class, 'letters_id');
+    }
 }

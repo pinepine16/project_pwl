@@ -2,17 +2,38 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Mahasiswa extends Model
 {
+    use HasFactory;
+
     protected $table = 'mahasiswa';
-
     protected $primaryKey = 'id';
+    public $timestamps = false;
 
-    protected $fillable = [ 'name', 'address', 'semester'];
+    protected $fillable = [
+        'id',
+        'address',
+        'name',
+        'semester',
+        'user_id',
+    ];
 
-    protected $keyType = 'string';
+    /**
+     * Mahasiswa dimiliki oleh satu user.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
-    public $incrementing = false;
+    /**
+     * Mahasiswa punya banyak surat.
+     */
+    public function letters()
+    {
+        return $this->hasMany(Letter::class, 'mahasiswa_id');
+    }
 }
