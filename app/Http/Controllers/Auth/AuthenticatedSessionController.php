@@ -24,12 +24,36 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        $request->validate([
+            'id' => 'required',
+            'password' => 'required',
+        ]);
+
+        if (!Auth::attempt($request->only('id', 'password'), $request->boolean('remember'))) {
+            throw ValidationException::withMessages([
+                'id' => __('ID atau password salah.'),
+            ]);
+        }
+
+        $user = Auth::user();
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        $role = $user->role->role_name ?? null;
+
+        switch ($role) {
+            case 'admin':
+                return redirect()->route('adminList');
+            case 'kaprodi':
+                return redirect()->intended('kaprodi.index');
+            case 'mahasiswa':
+                return redirect()->intended('mahasiswaList');
+            default:
+                Auth::logout();
+                return redirect('/login')->with('error', 'Role tidak dikenali.');
+        }
     }
+
 
     /**
      * Destroy an authenticated session.

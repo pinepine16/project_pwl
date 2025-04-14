@@ -14,15 +14,12 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        // Pastikan user sudah login
         if (!Auth::check()) {
             return redirect('/login');
         }
 
-        // Ambil role user
         $userRole = Auth::user()->role->role_name ?? null;
 
-        // Cek apakah role user ada di list yang diizinkan
         if (!in_array($userRole, $roles)) {
             abort(403, 'Unauthorized');
         }

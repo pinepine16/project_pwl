@@ -11,8 +11,8 @@ class KaprodiController extends Controller
 {
     public function index()
     {
-        $letters = letter_detail::with('mahasiswa.user')->get(); // ambil semua surat
-        return view('kaprodi.letters.index', compact('letters'));
+        $letters = letter_detail::with('mahasiswa.user')->get();
+        return view('kaprodi.index', compact('letters'));
     }
 
     public function approve($id)

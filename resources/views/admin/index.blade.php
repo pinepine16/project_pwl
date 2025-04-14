@@ -14,12 +14,11 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table id="add-row" class="table table-striped table-hover text-center align-middle">
-                    <thead class="table-primary">
+                    <thead class="table">
                         <tr>
                             <th>No</th>
                             <th>ID</th>
                             <th>Name</th>
-                            <!-- <th>Password</th> -->
                             <th>Role</th>
                             <th>Program Studi</th>
                             <th style="width: 15%">Action</th>
@@ -31,33 +30,27 @@
                             <td>{{ $loop->iteration }}</td> 
                             <td>{{ $adm->id }}</td>
                             <td>{{ $adm->name }}</td>
-                            <!-- <td>{{ $adm->password }}</td> -->
                             <td>{{ $adm->role->role_name }}</td>
                             <td>{{ $adm->programStudi->major_name }}</td>
                             <td>
                                 <div class="d-flex justify-content-center gap-2">
                                     <a
                                         href="{{ route('userUpdate', [$adm->id]) }}"
-                                        class="ti ti-edit btn-primary"
+                                        class="ti ti-edit"
                                         data-bs-toggle="tooltip"
                                         title="Edit User"
                                     >
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <form method="post" action="{{ route('userDelete', [$adm->id]) }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button
-                                            type="submit"
-                                            class="btn btn-sm btn-danger"
-                                            data-bs-toggle="tooltip"
-                                            title="Delete User"
-                                            onclick="return confirm('Yakin ingin menghapus user ini?')"
-                                        >
-                                            <i class="fas fa-trash-alt"></i>
-                                        </button>
-                                        
-                                    </form>
+                                    <a
+                                        href="{{ route('userDelete', [$adm->id]) }}"
+                                        class="ti ti-trash"
+                                        data-bs-toggle="tooltip"
+                                        title="Edit User"
+                                        onclick="return confirm('Yakin ingin menghapus user ini?')"
+                                    >
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
                                 </div>
                             </td>
                         </tr>

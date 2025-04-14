@@ -11208,6 +11208,9 @@
 
 .ti-trash:before {
   content: "\eb41";
+  color: red;
+  width: 20px;
+  height: 20px;
 }
 
 .ti-trash-off:before {

@@ -24,7 +24,7 @@
             </tr>
         </thead>
         <tbody>
-            @forelse($letters as $index => $letter)
+            @foreach($letters as $letter)
                 <tr>
                     <td>{{ $index + 1 }}</td>
                     <td>{{ $letter->mahasiswa->name ?? '-' }}</td>
@@ -41,7 +41,7 @@
                         @endif
                     </td>
                     <td>{{ $letter->created_at ? $letter->created_at->format('d-m-Y') : '-' }}</td>
-                    <td>
+                    <!-- <td>
                         @if($letter->status == 'pending')
                             <form action="{{ route('kaprodi.letters.approve', $letter->id) }}" method="POST" style="display:inline-block;">
                                 @csrf
@@ -55,13 +55,13 @@
                         @else
                             <em>Tidak tersedia</em>
                         @endif
-                    </td>
+                    </td> -->
                 </tr>
-            @empty
+            
                 <tr>
                     <td colspan="8" class="text-center">Tidak ada surat.</td>
                 </tr>
-            @endforelse
+            @endforeach
         </tbody>
     </table>
 </div>
