@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Illuminate\Validation\ValidationException;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -29,6 +30,10 @@ class AuthenticatedSessionController extends Controller
             'password' => 'required',
         ]);
 
+        $role = $user->role->role_name ?? null;
+        dd($role); // Debugging role user
+
+
         if (!Auth::attempt($request->only('id', 'password'), $request->boolean('remember'))) {
             throw ValidationException::withMessages([
                 'id' => __('ID atau password salah.'),
@@ -46,6 +51,8 @@ class AuthenticatedSessionController extends Controller
                 return redirect()->route('adminList');
             case 'kaprodi':
                 return redirect()->intended('kaprodi.index');
+            case 'tu':
+                return redirect()->intended('tu.index');
             case 'mahasiswa':
                 return redirect()->intended('mahasiswaList');
             default:

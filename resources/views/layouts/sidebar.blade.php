@@ -54,7 +54,7 @@
 
             @if(Auth::user()->role_id == 2) 
               <li class="sidebar-item">
-                <a class="sidebar-link" href="{{route('kaprod')}}" aria-expanded="false">
+                <a class="sidebar-link" href="{{route('kaprodi.index')}}" aria-expanded="false">
                   <span>
                     <i class="ti ti-layout-dashboard"></i>
                   </span>
@@ -65,7 +65,7 @@
 
             @if(Auth::user()->role_id == 3) 
               <li class="sidebar-item">
-                <a class="sidebar-link" href="{{route('kaprod')}}" aria-expanded="false">
+                <a class="sidebar-link" href="{{route('kaprodi.index')}}" aria-expanded="false">
                   <span>
                     <i class="ti ti-layout-dashboard"></i>
                   </span>

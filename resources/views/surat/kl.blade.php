@@ -13,7 +13,7 @@
         </div>
         
         <div class="card-body">
-            <form action="#" method="POST">
+            <form action="{{  }}" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="nim" class="form-label">NIM</label>
@@ -22,8 +22,8 @@
                         name="nim" 
                         class="form-control" 
                         id="nim" 
-                        placeholder="e.g. 2372001" 
                         required
+                        value={{ Auth::user()->id}}
                     />
                 </div>
                 
@@ -34,8 +34,8 @@
                         name="name" 
                         class="form-control" 
                         id="name" 
-                        placeholder="e.g. John Doe" 
                         required
+                        value={{ Auth::user()->name}}
                     />
                 </div>
 
