@@ -5,6 +5,7 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\LetterDetailController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\KaprodiController;
+use App\Http\Controllers\TUController;
 use App\Http\Controllers\Kaprodi\LetterApprovalController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -49,23 +50,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
         
     });
+
+    //kaprodi
+    Route::get('kaprodi', [KaprodiController::class, 'index'])->name('kaprodi.index');
     
 
-    // kaprodi 
-    Route::get('/kaprodi', [KaprodiController::class, 'index'])->name('kaprodi');
-    Route::prefix('kaprodi')->middleware('auth')->group(function () {
-        Route::get('/surat', [KaprodiController::class, 'index'])->name('kaprodi.index');
-        Route::get('/surat/{id}', [KaprodiController::class, 'show'])->name('kaprodi.show');
-        Route::post('/surat/{id}/approve', [KaprodiController::class, 'approve'])->name('kaprodi.approve');
-        Route::post('/surat/{id}/reject', [KaprodiController::class, 'reject'])->name('kaprodi.reject');
-        Route::get('/kaprodi', [KaprodiController::class, 'index'])->name('kaprodi.index');
-        Route::post('/kaprodi/approve/{id}', [KaprodiController::class, 'approve'])->name('kaprodi.approve');
-        Route::post('/kaprodi/reject/{id}', [KaprodiController::class, 'reject'])->name('kaprodi.reject');
-        Route::post('/kaprodi/letters/{id}/reject', [LetterApprovalController::class, 'reject'])->name('kaprodi.letters.reject');
-        Route::middleware(['auth', 'role:kaprodi'])->group(function () {
-        Route::get('/kaprodi/dashboard', [KaprodiController::class, 'index'])->name('kaprodi.dashboard');
-        });
-    });
+    // TU 
+    Route::get('tu', [TUController::class, 'index'])->name('tu.index');
+
+
+
+
+
+
     
     Route::middleware(['auth'])->group(function () {
         Route::get('/kaprodi/letters', [LetterApprovalController::class, 'index'])->name('kaprodi.letters.index');
