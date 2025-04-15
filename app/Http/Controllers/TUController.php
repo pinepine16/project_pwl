@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\mahasiswa;
 
-class KaprodiController extends Controller
+
+class TUController extends Controller
 {
     public function index()
     {
-        return view ('kaprodi.index')
+        return view ('tu.index')
             -> with ('mahasiswas', Mahasiswa::all());
     }
 }
