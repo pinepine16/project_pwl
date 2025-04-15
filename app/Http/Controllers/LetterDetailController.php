@@ -30,6 +30,7 @@ class LetterDetailController extends Controller
         return view ('surat.skma');
     }
 
+
     public function lhs()
     {
         return view ('surat.lhs');
@@ -47,20 +48,27 @@ class LetterDetailController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function skmaStore(Request $request)
     {
-        $validatedData =validator( $request->all(),[
+        $request->validate([
             'alamat' => 'required|string|max:200',
             'semester' => 'required|string|max:2',
-            'keperluan' => 'required|string|max:50',
+            'keperluan' => 'required|string|max:45',
             'kode_mk' => 'required|string|max:5',
             'nama_mk' => 'required|string|max:30',
-            'tujuan' => 'required|string|max:45',
-            'topik' => 'required|string',
-        ])->validate();
-        $letter_detail = new letter_detail($validatedData);
-        $letter_detail->save();
-        return redirect(route('mahasiswaList'));
+            'topik' => 'required|string|max:45',
+        ]);
+
+        letter_detail::create([
+            'alamat' => $request->alamat,
+            'semester' => $request->semester,
+            'keperluan' => $request->keperluan,
+            'kode_mk' => $request->kode_mk,
+            'nama_mk' => $request->nama_mk,
+            'topik' => $request->topik,
+        ]);
+        return redirect()->route('mahasiswa.index')
+            ->with('success', 'Surat SKMA berhasil dibuat.');
     }
 
     /**

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\letters;
 use Illuminate\Http\Request;
 
-class lettersController extends Controller
+class LettersController extends Controller
 {
     /**
      * Display a listing of the resource.

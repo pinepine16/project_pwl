@@ -23,8 +23,8 @@
                         name="nim" 
                         class="form-control" 
                         id="nim" 
-                        placeholder="e.g. 2372001" 
                         required
+                        value={{ Auth::user()->id}}
                     />
                 </div>
                 
@@ -35,8 +35,8 @@
                         name="name" 
                         class="form-control" 
                         id="name" 
-                        placeholder="e.g. John Doe" 
                         required
+                        value={{ Auth::user()->name}}
                     />
                 </div>
 

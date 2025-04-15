@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class programStudi extends Model
+class ProgramStudi extends Model
 {
     protected $table = 'program_studi';
 

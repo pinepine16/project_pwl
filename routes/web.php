@@ -6,10 +6,26 @@ use App\Http\Controllers\LetterDetailController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\KaprodiController;
 use App\Http\Controllers\TUController;
-use App\Http\Controllers\Kaprodi\LetterApprovalController;
+use App\Http\Controllers\LetterApprovalController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+
+Route::get('/test-role', function () {
+    $user = Auth::user();
+
+    if (!$user) {
+        return 'Belum login';
+    }
+
+    $role = $user->role->role_name ?? 'no role';
+
+    Log::info('User sedang login:', ['user' => $user->name, 'role' => $role]);
+
+    return "User: {$user->name}, Role: {$role}";
+});
+
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -43,6 +59,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('/', [MahasiswaController::class, 'index'])->name('mahasiswaList');
             Route::get('/detail', [MahasiswaController::class, 'detail'])->name('mahasiswaDetail');
             Route::get('/surat/skma', [LetterDetailController::class, 'skma'])->name('suratSkma');
+            Route::post('/surat/skma', [LetterDetailController::class, 'skmaStore'])->name('skmaStore');
             Route::get('/surat/lhs', [LetterDetailController::class, 'lhs'])->name('suratLhs');
             Route::get('/surat/sptmk', [LetterDetailController::class, 'sptmk'])->name('suratSptmk');
             Route::get('/surat/kl', [LetterDetailController::class, 'kl'])->name('suratKl');
@@ -51,23 +68,22 @@ Route::middleware(['auth', 'verified'])->group(function () {
         
     });
 
-    //kaprodi
-    Route::get('kaprodi', [KaprodiController::class, 'index'])->name('kaprodi.index');
-    
-
-    // TU 
-    Route::get('tu', [TUController::class, 'index'])->name('tu.index');
-
-
-
-
-
+    //kaprodi   
+    Route::middleware(['auth', 'role:kaprodi'])->group(function () {
+        Route::get('kaprodi', [KaprodiController::class, 'index'])->name('kaprodi.index');
+    });
 
     
     Route::middleware(['auth'])->group(function () {
         Route::get('/kaprodi/letters', [LetterApprovalController::class, 'index'])->name('kaprodi.letters.index');
         Route::post('/kaprodi/letters/{id}/approve', [LetterApprovalController::class, 'approve'])->name('kaprodi.letters.approve');
     });
+
+    // TU 
+    Route::middleware(['auth', 'role:tu'])->group(function () {
+        Route::get('tu', [TUController::class, 'index'])->name('tu.index');
+    });
+
 });
 
 Route::get('/', function () {

@@ -13,32 +13,9 @@
         </div>
 
         <div class="card-body">
-            <form method="POST" action="#">
+            <form method="POST" action="{{ route('skmaStore') }}">
                 @csrf
-                <div class="mb-3">
-                    <label for="nim" class="form-label">NIM</label>
-                    <input 
-                        type="text" 
-                        name="nim" 
-                        class="form-control" 
-                        id="nim" 
-                        placeholder="e.g. 2372001" 
-                        required
-                    />
-                </div>
-
-                <div class="mb-3">
-                    <label for="name" class="form-label">Nama</label>
-                    <input 
-                        type="text" 
-                        name="name" 
-                        class="form-control" 
-                        id="name" 
-                        placeholder="e.g. John Doe" 
-                        required
-                    />
-                </div>
-
+                
                 <div class="mb-3">
                     <label for="alamat" class="form-label">Alamat</label>
                     <input 
@@ -64,21 +41,57 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="keperluan_pengajuan" class="form-label">Keperluan Pengajuan</label>
+                    <label for="keperluan" class="form-label">Keperluan Pengajuan</label>
                     <input 
                         type="text" 
-                        name="keperluan_pengajuan" 
+                        name="keperluan" 
                         class="form-control" 
-                        id="keperluan_pengajuan" 
+                        id="keperluan" 
                         placeholder="Tulis keperluan pengajuan" 
                         required
                     />
                 </div>
 
-                <div class="text-end">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <button type="reset" class="btn btn-light">Cancel</button>
+                <div class="mb-3">
+                    <label for="kode_mk" class="form-label">kode_mk </label>
+                    <input 
+                        type="text" 
+                        name="kode_mk" 
+                        class="form-control" 
+                        id="kode_mk" 
+                        placeholder="Tulis kode_mk pengajuan" 
+                        required
+                    />
                 </div>
+
+                <div class="mb-3">
+                    <label for="nama_mk" class="form-label">nama_mk </label>
+                    <input 
+                        type="text" 
+                        name="nama_mk" 
+                        class="form-control" 
+                        id="nama_mk" 
+                        placeholder="Tulis nama_mk pengajuan" 
+                        required
+                    />
+                </div>
+
+                <div class="mb-3">
+                    <label for="topik" class="form-label">topik </label>
+                    <input 
+                        type="text" 
+                        name="topik" 
+                        class="form-control" 
+                        id="topik" 
+                        placeholder="Tulis topik pengajuan" 
+                        required
+                    />
+                </div>
+
+                <!-- <div class="text-end"> -->
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <!-- <button type="reset" class="btn btn-light">Cancel</button> -->
+                <!-- </div> -->
             </form>
         </div>
     </div>
