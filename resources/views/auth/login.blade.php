@@ -23,6 +23,7 @@
                 <a href="./index.html" class="text-nowrap logo-img text-center d-block py-3 w-100">
                   <img src="../assets/images/logos/dark-logo.svg" width="180" alt="">
                 </a>
+                <p>SubmIT</p>
                 <form method="POST" action="{{ route('login') }}">
                 @csrf
                   <div class="mb-3">

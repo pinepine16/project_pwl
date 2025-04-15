@@ -65,7 +65,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('/surat/kl', [LetterDetailController::class, 'kl'])->name('suratKl');
 
         });
-        
     });
 
     //kaprodi   
@@ -96,6 +95,8 @@ Route::get('/', function () {
             return redirect()->route('adminList');
         case 'kaprodi':
             return redirect()->route('kaprodi.index');
+        case 'tu':
+            return redirect()->route('tu.index');
         case 'mahasiswa':
             return redirect()->route('mahasiswaList');
         default:

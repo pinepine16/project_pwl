@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; // untuk auth()
+use Illuminate\Support\Facades\Auth; 
 use Symfony\Component\HttpFoundation\Response;
 
 class RoleMiddleware
@@ -22,7 +22,7 @@ class RoleMiddleware
 
         $userRole = Auth::user()->role->role_name ?? null;
 
-        dd($userRole);  
+        // dd($userRole);  
 
         
         \Log::info('Role user:', ['role' => $userRole]);

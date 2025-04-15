@@ -30,19 +30,18 @@ class AuthenticatedSessionController extends Controller
             'password' => 'required',
         ]);
 
-        $role = $user->role->role_name ?? null;
-        dd($role); // Debugging role user
-
-
         if (!Auth::attempt($request->only('id', 'password'), $request->boolean('remember'))) {
             throw ValidationException::withMessages([
                 'id' => __('ID atau password salah.'),
             ]);
         }
 
+        $request->session()->regenerate();
+
         $user = Auth::user();
 
-        $request->session()->regenerate();
+        // Debug: cek isi user
+        // dd($user);
 
         $role = $user->role->role_name ?? null;
 
@@ -60,6 +59,7 @@ class AuthenticatedSessionController extends Controller
                 return redirect('/login')->with('error', 'Role tidak dikenali.');
         }
     }
+
 
 
     /**
