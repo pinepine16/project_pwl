@@ -26,6 +26,30 @@
                   <span class="hide-menu">Dashboard</span>
                 </a>
               </li>
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="{{route('userCreate')}}" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-typography"></i>
+                  </span>
+                  <span class="hide-menu">Create User</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="{{route('userCreate')}}" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-typography"></i>
+                  </span>
+                  <span class="hide-menu">Create Program Studi</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="{{route('userCreate')}}" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-typography"></i>
+                  </span>
+                  <span class="hide-menu">Create Mata Kuliah</span>
+                </a>
+            </li>
             @endif
 
             @if(Auth::user()->role_id == 2) 
@@ -95,19 +119,7 @@
                 <span class="hide-menu">Laporan Hasil Studi</span>
               </a>
             </li>
-            @endif
-
-            @if(Auth::user()->role_id == 1) 
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="{{route('userCreate')}}" aria-expanded="false">
-                <span>
-                  <i class="ti ti-typography"></i>
-                </span>
-                <span class="hide-menu">Create User</span>
-              </a>
-            </li>
-            @endif
-            
+            @endif  
           </ul>
         </nav>
         <!-- End Sidebar navigation -->

@@ -1,62 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Login</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modernize Free</title>
+  <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
+  <link rel="stylesheet" href="../assets/css/styles.min.css" />
 </head>
-<body class="bg-gradient-to-br from-blue-100 to-blue-200 min-h-screen flex items-center justify-center">
 
-  <div class="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl">
-    <h2 class="text-2xl text-blue-600 text-center mb-6">Wellcome!</h2>
-
-    @if (session('status'))
-      <div class="bg-green-100 text-green-700 px-4 py-2 rounded mb-4 text-sm">
-        {{ session('status') }}
+<body>
+  <!--  Body Wrapper -->
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    <div
+      class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
+      <div class="d-flex align-items-center justify-content-center w-100">
+        <div class="row justify-content-center w-100">
+          <div class="col-md-8 col-lg-6 col-xxl-3">
+            <div class="card mb-0">
+              <div class="card-body">
+                <a href="./index.html" class="text-nowrap logo-img text-center d-block py-3 w-100">
+                  <img src="../assets/images/logos/dark-logo.svg" width="180" alt="">
+                </a>
+                <form method="POST" action="{{ route('login') }}">
+                @csrf
+                  <div class="mb-3">
+                    <label for="id" class="form-label">ID</label>
+                    <input type="text" name="id" class="form-control" id="id" aria-describedby="nrp" value="{{ old('id') }}" required autofocus>
+                  </div>
+                  <div class="mb-4">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                  </div>
+                  <div class="d-flex align-items-center justify-content-between mb-4">
+                    <div class="form-check">
+                      <input class="form-check-input primary" type="checkbox" value="" id="flexCheckChecked" checked>
+                      <label class="form-check-label text-dark" for="flexCheckChecked">
+                        Remeber this Device
+                      </label>
+                    </div>
+                    <a class="text-primary fw-bold" href="./index.html">Forgot Password ?</a>
+                  </div>
+                  <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2"> 
+                    Log in
+                  </button>
+                  <div class="d-flex align-items-center justify-content-center">
+                    <a class="text-primary fw-bold ms-2" href="./authentication-register.html">Create an account</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    @endif
-
-    <form method="POST" action="{{ route('login') }}">
-      @csrf
-
-      <!-- ID -->
-      <div class="mb-4">
-        <label for="id" class="block text-sm font-medium text-gray-700">ID</label>
-        <input id="id" name="id" type="text" value="{{ old('id') }}" required autofocus
-               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
-        @error('id')
-          <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-        @enderror
-      </div>
-
-      <!-- Password -->
-      <div class="mb-4">
-        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-        <input id="password" name="password" type="password" required
-               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
-        @error('password')
-          <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-        @enderror
-      </div>
-
-      <!-- Remember Me -->
-      <div class="flex items-center mb-4">
-        <input id="remember_me" name="remember" type="checkbox"
-               class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-        <label for="remember_me" class="ml-2 block text-sm text-gray-700">Remember me</label>
-      </div>
-
-      <!-- Submit -->
-      <div class="flex items-center justify-between">
-        <a href="{{ route('password.request') }}" class="text-sm text-blue-500 hover:underline">
-          Forgot your password?
-        </a>
-        <button type="submit"
-                class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
-          Log in
-        </button>
-      </div>
-    </form>
+    </div>
   </div>
+  <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+  <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
