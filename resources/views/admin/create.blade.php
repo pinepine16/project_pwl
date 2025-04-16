@@ -17,6 +17,10 @@
       <div class="card-body">
         <form method="POST" action="{{ route('userStore')}}">
           @csrf
+          <div class="mb-3">
+            <label for="id" class="form-label">NRP</label>
+            <input type="text" name="id" class="form-control" id="id" placeholder="Masukkan NRP" required>
+          </div>
 
           <div class="mb-3">
             <label for="name" class="form-label">Nama</label>

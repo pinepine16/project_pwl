@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\mahasiswa;
+use App\Models\user;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class MahasiswaController extends Controller
 {
@@ -20,8 +22,9 @@ class MahasiswaController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        return view ('mahasiswa.create');
+    {   
+        $users = User::all();
+        return view ('mahasiswa.create', compact('users'));
     }
 
     /**
@@ -30,14 +33,16 @@ class MahasiswaController extends Controller
     public function store(Request $request)
     {
         $validatedData =validator( $request->all(),[
-            'id' => 'required|string|max:11|unique:mahasiswa,id',
             'address' => 'required|string|max:45',
+            'nrp' => 'required |digits:7',
             'name' => 'required|string|max:45',
             'semester' => 'required|string|max:2',
+            'user_id' => 'required|digits:7',
         ])->validate();
-        $letter_detail = new letter_detail($validatedData);
-        $letter_detail->save();
-        return redirect(route('mahasiswaList'));
+        
+        $mahasiswa = new Mahasiswa($validatedData);
+        $mahasiswa->save();
+        return redirect(route('adminList'));
     }
 
     /**

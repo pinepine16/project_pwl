@@ -33,8 +33,16 @@
                   </span>
                   <span class="hide-menu">Create User</span>
                 </a>
-            </li>
-            <li class="sidebar-item">
+              </li>
+              <li class="sidebar-item">
+                <a class="sidebar-link" href="{{route('mahasiswaCreate')}}" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-typography"></i>
+                  </span>
+                  <span class="hide-menu">Create Mahasiswa</span>
+                </a>
+              </li>
+            <!-- <li class="sidebar-item">
                 <a class="sidebar-link" href="{{route('userCreate')}}" aria-expanded="false">
                   <span>
                     <i class="ti ti-typography"></i>
@@ -49,7 +57,7 @@
                   </span>
                   <span class="hide-menu">Create Mata Kuliah</span>
                 </a>
-            </li>
+            </li> -->
             @endif
 
             @if(Auth::user()->role_id == 2) 
@@ -88,7 +96,7 @@
               <span class="hide-menu">Jenis Surat</span>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{{route('suratSkma')}}" aria-expanded="false">
+              <a class="sidebar-link" href="{{route('suratSkma', ['type' => 3])}}" aria-expanded="false">
                 <span>
                   <i class="ti ti-article"></i>
                 </span>
@@ -96,7 +104,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{{route('suratSptmk')}}" aria-expanded="false">
+              <a class="sidebar-link" href="{{route('suratSptmk', ['type' => 4])}}" aria-expanded="false">
                 <span>
                   <i class="ti ti-alert-circle"></i>
                 </span>
@@ -104,7 +112,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{{route('suratKl')}}" aria-expanded="false">
+              <a class="sidebar-link" href="{{route('suratKl', ['type' => 1])}}" aria-expanded="false">
                 <span>
                   <i class="ti ti-cards"></i>
                 </span>
@@ -112,7 +120,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{{route('suratLhs')}}" aria-expanded="false">
+              <a class="sidebar-link" href="{{route('suratLhs', ['type' => 2])}}" aria-expanded="false">
                 <span>
                   <i class="ti ti-file-description"></i>
                 </span>

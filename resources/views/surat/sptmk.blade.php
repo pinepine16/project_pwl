@@ -13,7 +13,7 @@
         </div>
 
         <div class="card-body">
-            <form method="POST" action="#">
+            <form method="POST" action="{{ route('skmaStore') }}">
                 @csrf
                 <div class="mb-3">
                     <label for="nim" class="form-label">NIM</label>

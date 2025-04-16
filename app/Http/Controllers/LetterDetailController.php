@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\letter_detail;
+use App\Models\lettertype;
+use App\Models\Mahasiswa;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class LetterDetailController extends Controller
@@ -27,23 +31,31 @@ class LetterDetailController extends Controller
 
     public function skma()
     {
-        return view ('surat.skma');
+        $lettertype = LetterType::where('letter_name', 'skma')->first();
+        return view('surat.skma', ['lettertype_id' => $lettertype->id_type,
+        'letterTypes' => LetterType::all()]);
     }
 
 
     public function lhs()
     {
-        return view ('surat.lhs');
+        $lettertype = LetterType::where('letter_name', 'lhs')->first();
+        return view('surat.skma', ['lettertype_id' => $lettertype->id_type,
+        'letterTypes' => LetterType::all()]);
     }
 
     public function sptmk()
     {
-        return view ('surat.sptmk');
+        $lettertype = LetterType::where('letter_name', 'sptmk')->first();
+        return view('surat.skma', ['lettertype_id' => $lettertype->id_type,
+        'letterTypes' => LetterType::all()]);
     }
 
     public function kl()
     {
-        return view ('surat.kl');
+        $lettertype = LetterType::where('letter_name', 'kl')->first();
+        return view('surat.skma', ['lettertype_id' => $lettertype->id_type,
+        'letterTypes' => LetterType::all()]);
     }
     /**
      * Store a newly created resource in storage.
@@ -59,16 +71,33 @@ class LetterDetailController extends Controller
             'topik' => 'required|string|max:45',
         ]);
 
-        letter_detail::create([
-            'alamat' => $request->alamat,
-            'semester' => $request->semester,
-            'keperluan' => $request->keperluan,
-            'kode_mk' => $request->kode_mk,
-            'nama_mk' => $request->nama_mk,
-            'topik' => $request->topik,
+        // letter_detail::create([
+        //     'alamat' => $request->alamat,
+        //     'semester' => $request->semester,
+        //     'keperluan' => $request->keperluan,
+        //     'kode_mk' => $request->kode_mk,
+        //     'nama_mk' => $request->nama_mk,
+        //     'topik' => $request->topik,
+        // ]);
+        // return redirect()->route('mahasiswa.index')
+        //     ->with('success', 'Surat SKMA berhasil dibuat.');
+
+        $mahasiswa_id = Mahasiswa::where('user_id', auth()->id())->value('id');
+        $uploaded_by = Auth::user()->name;
+
+        DB::statement('CALL insert_letter_with_detail1(?, ?, ?, ?, ?, ?, ?, ?, ?)', [
+            $request->lettertype_id,
+            $mahasiswa_id,
+            auth()->user()->name,
+            $request->alamat,
+            $request->semester,
+            $request->keperluan,
+            $request->kode_mk,
+            $request->nama_mk,
+            $request->topik
         ]);
-        return redirect()->route('mahasiswa.index')
-            ->with('success', 'Surat SKMA berhasil dibuat.');
+
+        return redirect()->back()->with('success', 'Pengajuan surat berhasil!');
     }
 
     /**

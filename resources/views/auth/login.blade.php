@@ -20,10 +20,10 @@
           <div class="col-md-8 col-lg-6 col-xxl-3">
             <div class="card mb-0">
               <div class="card-body">
-                <a href="./index.html" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                  <img src="../assets/images/logos/dark-logo.svg" width="180" alt="">
-                </a>
-                <p>SubmIT</p>
+                <!-- <a href="./index.html" class="text-nowrap logo-img text-center d-block py-3 w-100">
+                  <img src="../assets/images/logos/favicon.svg" width="180" alt="">
+                </a> -->
+                <h2 class="fw-bold text-primary mb-1 text-center d-block py-3 w-100">Subm<span class="text-dark">IT</span></h2>
                 <form method="POST" action="{{ route('login') }}">
                 @csrf
                   <div class="mb-3">

@@ -37,18 +37,15 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validatedData =validator( $request->all(),[
+            'id' => 'required|digits:7',
             'name' => 'required|string|max:255',
             'password' => 'required|min:6',
             'role_id' => 'required|integer',
             'program_studi_id' => 'nullable|integer',
         ])->validate();
-
-        DB::statement("CALL insert_user(?, ?, ?, ?)", [
-            Hash::make($request->password),
-            $request->name,
-            $request->role_id,
-            $request->program_studi_id
-        ]);
+        $user = new User($validatedData);
+        $user->password = Hash::make($validatedData['password']);
+        $user->save();
         return redirect()->route('adminList')->with('success', 'User berhasil ditambahkan!');
     }
 

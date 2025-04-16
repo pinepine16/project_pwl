@@ -14,9 +14,9 @@ class Mahasiswa extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'id',
         'address',
         'name',
+        'nrp',
         'semester',
         'user_id',
     ];

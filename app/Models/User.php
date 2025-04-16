@@ -18,7 +18,7 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-    protected $fillable = ['name', 'password', 'role_id', 'program_studi_id'];
+    protected $fillable = ['id','name', 'password', 'role_id', 'program_studi_id'];
 
 
     public $timestamps = false;
@@ -58,6 +58,11 @@ class User extends Authenticatable
     public function programStudi()
     {
         return $this->belongsTo(programStudi::class);
+    }
+
+    public function mahasiswa()
+    {
+        return $this->hasOne(Mahasiswa::class);
     }
 
 }

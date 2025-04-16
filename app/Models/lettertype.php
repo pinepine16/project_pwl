@@ -17,4 +17,6 @@ class LetterType extends Model
     {
         return $this->hasMany(Letter::class, 'lettertype_id_type');
     }
+
+    public $timestamps = false;
 }
