@@ -34,6 +34,6 @@ class Mahasiswa extends Model
      */
     public function letters()
     {
-        return $this->hasMany(Letter::class, 'mahasiswa_id');
+        return $this->hasMany(Letters::class, 'mahasiswa_id','id');
     }
 }

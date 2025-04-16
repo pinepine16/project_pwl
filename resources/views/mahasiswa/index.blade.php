@@ -24,27 +24,29 @@
                     </thead>
                     <tbody>
                         @foreach($mahasiswas as $index => $mhs)
-                        <tr>
-                            <td>{{ $index + 1 }}</td>
-                            <td>{{ $mhs->letters->letter_name }}</td>
-                            <td>
-                                <span class="badge 
-                                    {{ $mhs->status == 'Disetujui' ? 'bg-success' : 
-                                       ($mhs->status == 'Ditolak' ? 'bg-danger' : 'bg-warning') }}">
-                                    {{ $mhs->status }}
-                                </span>
-                            </td>
-                            <td>
-                                <div class="btn-group" role="group">
-                                    <a 
-                                        href="{{ route('mahasiswaDetail', $mhs->id) }}" 
-                                        class="btn btn-info btn-sm"
-                                        data-bs-toggle="tooltip" title="Detail Mahasiswa">
-                                        <i class="fas fa-info-circle"></i>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                            @foreach($mhs->letters as $letter)
+                            <tr>
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ $letter->letterType->letter_name ?? '-'}}</td>
+                                <td>
+                                    <span class="badge 
+                                        {{ $letter->status == 'Disetujui' ? 'bg-success' : 
+                                        ($letter->status == 'Ditolak' ? 'bg-danger' : 'bg-warning') }}">
+                                        {{ $letter->status }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <a 
+                                            href="{{ route('mahasiswaDetail', $mhs->id) }}" 
+                                            class="btn btn-info btn-sm"
+                                            data-bs-toggle="tooltip" title="Detail Mahasiswa">
+                                            <i class="fas fa-info-circle"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
                         @endforeach
                     </tbody>
                 </table>

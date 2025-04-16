@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\mahasiswa;
 use App\Models\user;
+use App\Models\letters;
+use App\Models\lettertype;
+use App\Models\letter_detail;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -15,7 +18,10 @@ class MahasiswaController extends Controller
     public function index()
     {
         return view ('mahasiswa.index')
-            -> with ('mahasiswas', Mahasiswa::all(), letters::all(),);
+            -> with ('mahasiswas', Mahasiswa::all())
+            -> with ('letters', Letters::all())
+            -> with ('letter_detail', Letter_detail::all())
+            -> with ('lettertype', Lettertype::all());
     }
 
     /**

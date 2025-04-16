@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Letter extends Model
+class Letters extends Model
 {
     use HasFactory;
 
@@ -27,11 +27,11 @@ class Letter extends Model
 
     public function letterType()
     {
-        return $this->belongsTo(lettertype::class, 'lettertype_id_type');
+        return $this->belongsTo(Lettertype::class, 'lettertype_id_type','id_type');
     }
 
     public function detail()
     {
-        return $this->hasOne(letter_detail::class, 'letters_id');
+        return $this->hasOne(Letter_detail::class, 'letters_id');
     }
 }
