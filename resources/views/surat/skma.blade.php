@@ -15,7 +15,7 @@
         <div class="card-body">
             <form method="POST" action="{{ route('skmaStore') }}">
                 @csrf
-                
+                <input type="hidden" name="lettertype_id" value="{{ $lettertype_id }}">
                 <div class="mb-3">
                     <label for="alamat" class="form-label">Alamat</label>
                     <input 

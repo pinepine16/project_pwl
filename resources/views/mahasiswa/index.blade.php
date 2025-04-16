@@ -26,7 +26,7 @@
                         @foreach($mahasiswas as $index => $mhs)
                         <tr>
                             <td>{{ $index + 1 }}</td>
-                            <td>{{ $mhs->jenis_surat }}</td>
+                            <td>{{ $mhs->letters->letter_name }}</td>
                             <td>
                                 <span class="badge 
                                     {{ $mhs->status == 'Disetujui' ? 'bg-success' : 
@@ -42,20 +42,6 @@
                                         data-bs-toggle="tooltip" title="Detail Mahasiswa">
                                         <i class="fas fa-info-circle"></i>
                                     </a>
-                                    <a 
-                                        href="{{ route('mahasiswaUpdate', $mhs->id) }}" 
-                                        class="btn btn-primary btn-sm"
-                                        data-bs-toggle="tooltip" title="Edit Mahasiswa">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                    <form method="post" action="{{ route('mahasiswaDelete', $mhs->id) }}" class="d-inline" 
-                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" data-bs-toggle="tooltip" title="Hapus Mahasiswa">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </form>
                                 </div>
                             </td>
                         </tr>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\letter_detail;
 use App\Models\lettertype;
 use App\Models\Mahasiswa;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -26,7 +27,7 @@ class LetterDetailController extends Controller
      */
     public function create()
     {
-        //
+        $lettertype = lettertype::all();
     }
 
     public function skma()
@@ -71,24 +72,18 @@ class LetterDetailController extends Controller
             'topik' => 'required|string|max:45',
         ]);
 
-        // letter_detail::create([
-        //     'alamat' => $request->alamat,
-        //     'semester' => $request->semester,
-        //     'keperluan' => $request->keperluan,
-        //     'kode_mk' => $request->kode_mk,
-        //     'nama_mk' => $request->nama_mk,
-        //     'topik' => $request->topik,
-        // ]);
-        // return redirect()->route('mahasiswa.index')
-        //     ->with('success', 'Surat SKMA berhasil dibuat.');
-
         $mahasiswa_id = Mahasiswa::where('user_id', auth()->id())->value('id');
-        $uploaded_by = Auth::user()->name;
 
-        DB::statement('CALL insert_letter_with_detail1(?, ?, ?, ?, ?, ?, ?, ?, ?)', [
+        DB::statement("CALL insert_letter2(?, ?, ?, @new_id)", [
+            'pending',
             $request->lettertype_id,
-            $mahasiswa_id,
-            auth()->user()->name,
+            $mahasiswa_id
+        ]);
+        
+        $letter_id = DB::select("SELECT @new_id as letter_id")[0]->letter_id;
+
+        DB::statement('CALL insert_letter_detail2( ?, ?, ?, ?, ?, ?, ?)', [
+            $letter_id,
             $request->alamat,
             $request->semester,
             $request->keperluan,
@@ -97,7 +92,7 @@ class LetterDetailController extends Controller
             $request->topik
         ]);
 
-        return redirect()->back()->with('success', 'Pengajuan surat berhasil!');
+        return redirect(route(adminList))->back()->with('success', 'Pengajuan surat berhasil!');
     }
 
     /**

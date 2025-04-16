@@ -10,9 +10,13 @@ class Letter extends Model
     use HasFactory;
 
     protected $table = 'letters';
+    protected $primaryKey = 'id';
+    protected $keyType = 'string';
+
+    public $incrementing = true;
 
     protected $fillable = [
-        'status', 'created_at', 'updated_at', 'uploaded_by',
+        'status', 'created_at', 'updated_at',
         'lettertype_id_type', 'mahasiswa_id'
     ];
 

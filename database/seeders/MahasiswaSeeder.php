@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use App\Models\Mahasiswa;
 
 class MahasiswaSeeder extends Seeder
 {
@@ -13,11 +15,13 @@ class MahasiswaSeeder extends Seeder
     public function run(): void
     {
         DB::table('mahasiswa')->insert([
-            'id' => '10000',
-            'name' => 'Admin',
-            'password' => Hash::make('admin123'),
-            'role_id' => 1,
-            'program_studi_id' => 1,
+            'id' => '10001',
+            'name' => 'Davin Chen',
+            'nrp' => '2372001',
+            'address' =>'Jl. Kaki',
+            'semester' => '3',
+            'user_id' => '2372001',
+
         ]);
     }
 }
