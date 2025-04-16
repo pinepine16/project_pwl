@@ -34,14 +34,14 @@
                   <span class="hide-menu">Create User</span>
                 </a>
               </li>
-              <li class="sidebar-item">
+              <!-- <li class="sidebar-item">
                 <a class="sidebar-link" href="{{route('mahasiswaCreate')}}" aria-expanded="false">
                   <span>
                     <i class="ti ti-typography"></i>
                   </span>
                   <span class="hide-menu">Create Mahasiswa</span>
                 </a>
-              </li>
+              </li> -->
             <!-- <li class="sidebar-item">
                 <a class="sidebar-link" href="{{route('userCreate')}}" aria-expanded="false">
                   <span>

@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             ProgramStudiSeeder::class,
             RoleSeeder::class,
             UserSeeder::class,
+            LetterTypeSeeder::class,
         ]);
     }
 }

@@ -46,7 +46,17 @@ class UserController extends Controller
         $user = new User($validatedData);
         $user->password = Hash::make($validatedData['password']);
         $user->save();
-        return redirect()->route('adminList')->with('success', 'User berhasil ditambahkan!');
+
+        $newUSer = DB::table('user')->where('id', $validatedData['id'])->first();
+        $users = User::all();
+        if ($newUSer->role_id==4) {
+            return view('mahasiswa.create')
+            ->with('newUser', $newUSer)
+            ->with('users', $users);
+        } else {
+            return redirect(route('adminList'))
+            ->with('users', $users);
+        };
     }
 
     /**
